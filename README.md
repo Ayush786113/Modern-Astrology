@@ -8,3 +8,10 @@ The main features are:
 5) Lotte animation used with JSON file format
 6) Listview to display the predictions
 7) Google Pay integration to pay the astrologer
+
+Some screenshots of the app are:
+
+![alt text](https://github.com/Ayush786113/Modern-Astrology/blob/master/main.jpeg)
+![alt text](https://github.com/Ayush786113/Modern-Astrology/blob/master/timepicker.jpeg)
+![alt text](https://github.com/Ayush786113/Modern-Astrology/blob/master/wait.jpeg)
+![alt text](https://github.com/Ayush786113/Modern-Astrology/blob/master/datepicker.jpeg)
