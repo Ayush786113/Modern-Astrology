@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow_bg"
+    tools:context=".MainActivity"
+    tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/linearname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/heading"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txtname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="291dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/txtname"
+                    app:layout_constraintTop_toBottomOf="@+id/heading" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lineardate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/linearname"
+            android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txtdate"
+                    android:layout_width="51dp"
+                    android:layout_height="26dp"
+                    android:text="@string/date"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_date"
+                    android:layout_marginStart="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lineartime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/lineardate"
+            android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txttime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/time"
+                    android:layout_width="184dp"
+                    android:layout_height="46dp"
+                    android:text="@string/select_time"
+                    android:layout_marginStart="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/lineartime"
+            android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txtplace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/birth_place"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearcplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/linearplace"
+            android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txt_c_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/currentplace"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/presentplace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/question"
+            android:layout_above="@id/prediction"
+            android:layout_marginBottom="25dp"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:id="@+id/prediction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_above="@id/bottomNavigationView"
+            android:padding="10dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/free"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/free" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/paid"
+                    android:layout_marginStart="10dp"/>
+        </LinearLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/yellow_bg"
+            app:menu="@menu/bottomnav" />
+
+</RelativeLayout>

@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "258528015407",
+    "firebase_url": "https://modern-astrology-kama-default-rtdb.firebaseio.com",
+    "project_id": "modern-astrology-kama",
+    "storage_bucket": "modern-astrology-kama.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258528015407:android:ccd67785a09e02d40642da",
+        "android_client_info": {
+          "package_name": "com.project.modernastrology"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258528015407-1p8opvgp9f44j2pre92me9s8e9iem5nl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.modernastrology",
+            "certificate_hash": "a3dc3c0d73f2bb83c154f3c2e6bf417138b2c869"
+          }
+        },
+        {
+          "client_id": "258528015407-0di2afj654k2a0i85b59ejpqs607q3i9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRzgycoTa4gz_icZyZg2WPLN_ETgobbgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258528015407-0di2afj654k2a0i85b59ejpqs607q3i9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258528015407:android:d4bc49e29d36e9980642da",
+        "android_client_info": {
+          "package_name": "com.project.modernastrology_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258528015407-0di2afj654k2a0i85b59ejpqs607q3i9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRzgycoTa4gz_icZyZg2WPLN_ETgobbgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258528015407-0di2afj654k2a0i85b59ejpqs607q3i9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

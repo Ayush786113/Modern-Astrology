@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Modern Astrology</string>
+    <string name="modern_astrology">Bienvenido a la astrología moderna</string>
+    <string name="name">Nombre</string>
+    <string name="date">Fecha</string>
+    <string name="time">Hora</string>
+    <string name="birth_place">Lugar de nacimiento</string>
+    <string name="select_date">Seleccionar fecha de nacimiento</string>
+    <string name="select_time">Seleccionar hora de nacimiento</string>
+    <string name="question">Ingrese su pregunta aquí</string>
+    <string name="free">Predicción libre</string>
+    <string name="paid">Predicción pagada</string>
+    <string name="home">Pantalla de inicio</string>
+    <string name="prediction">Predicción</string>
+    <string name="currentplace">Lugar actual</string>
+    <string name="send">Enviar</string>
+    <string name="otp">Verificar OTP</string>
+    <string name="phoneHint">Ingrese su número telefónico</string>
+    <string name="otpHint">Ingrese OTP</string>
+    <string name="success">Éxito</string>
+    <string name="fail">Fallido</string>
+</resources>

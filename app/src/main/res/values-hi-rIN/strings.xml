@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Modern Astrology</string>
+    <string name="modern_astrology">आधुनिक ज्योतिष में आपका स्वागत है</string>
+    <string name="name">नाम</string>
+    <string name="date">तारीख</string>
+    <string name="time">समय</string>
+    <string name="birth_place">जन्म स्थान</string>
+    <string name="select_date">जन्म तिथि चुनें</string>
+    <string name="select_time">जन्म समय का चयन करें</string>
+    <string name="free">मुफ्त भविष्यवाणी</string>
+    <string name="paid">भुगतान की भविष्यवाणी</string>
+    <string name="home">घर</string>
+    <string name="prediction">भविष्यवाणी</string>
+    <string name="question">यहां अपना प्रश्न दर्ज करें</string>
+    <string name="currentplace">वर्तमान स्थान</string>
+    <string name="send">भेज दो</string>
+    <string name="otp">OTP सत्यापित करें</string>
+    <string name="phoneHint">अपना दूरभाष क्रमांक दर्ज करें</string>
+    <string name="otpHint">OTP दर्ज करें</string>
+    <string name="success">सफलता</string>
+    <string name="fail">अनुत्तीर्ण होना</string>
+</resources>

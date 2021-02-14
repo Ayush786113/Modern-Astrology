@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name" translatable="false">Modern Astrology</string>
+    <string name="modern_astrology">Welcome to Modern Astrology</string>
+    <string name="name">Name</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="birth_place">Birth Place</string>
+    <string name="currentplace">Current Place</string>
+    <string name="select_date">Select Birth Date</string>
+    <string name="select_time">Select Birth Time</string>
+    <string name="question">Enter Your Question Here</string>
+    <string name="free">Free Prediction</string>
+    <string name="paid">Paid Prediction</string>
+    <string name="home">Home</string>
+    <string name="prediction">Prediction</string>
+    <string name="send">Send</string>
+    <string name="otp">Verify OTP</string>
+    <string name="phoneHint">Enter Your Phone Number</string>
+    <string name="otpHint">Enter OTP</string>
+    <string name="success">Success</string>
+    <string name="fail">Failed</string>
+    <string name="validnumber">Enter a Valid Phone Number</string>
+    <string name="wait">Please Return after 3 Hours</string>
+    <string name="signout">Sign Out</string>
+    <string name="noapp">No Payment App Found</string>
+    <string name="noprediction">No Prediction Yet</string>
+</resources>

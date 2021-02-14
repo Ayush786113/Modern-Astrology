@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Modern Astrology</string>
+    <string name="modern_astrology">আধুনিক জ্যোতিষবিদ্যায় আপনাকে স্বাগতম</string>
+    <string name="name">নাম</string>
+    <string name="date">তারিখ</string>
+    <string name="time">সময়</string>
+    <string name="birth_place">জন্ম স্থান</string>
+    <string name="select_date">জন্ম তারিখটি নির্বাচন করুন</string>
+    <string name="select_time">জন্মের সময় নির্বাচন করুন</string>
+    <string name="question">আপনার প্রশ্ন এখানে লিখুন</string>
+    <string name="free">নিখরচায় পূর্বাভাস</string>
+    <string name="paid">প্রদত্ত পূর্বাভাস</string>
+    <string name="home">মূল পর্দা</string>
+    <string name="prediction">ভবিষ্যদ্বাণী</string>
+    <string name="currentplace">বর্তমান স্থান</string>
+    <string name="send">প্রেরণ</string>
+    <string name="otp">OTP যাচাই করুন</string>
+    <string name="phoneHint">আপনার ফোন নম্বর লিখুন</string>
+    <string name="otpHint">ওটিপি প্রবেশ করান</string>
+    <string name="success">সাফল্য</string>
+    <string name="fail">ব্যর্থ হয়েছে</string>
+</resources>
