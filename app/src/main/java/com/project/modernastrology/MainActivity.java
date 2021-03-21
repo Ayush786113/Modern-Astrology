@@ -1,11 +1,6 @@
 package com.project.modernastrology;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,19 +9,23 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.project.modernastrology.databinding.ActivityMainBinding;
 
 import java.util.Calendar;
@@ -34,7 +33,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainBinding binding;
-    String name, date, time, b_place, c_place, question, request, uid, phone;
+    String name, date, time, b_place, c_place, question, request, apptime, phone, booking, appointment;
     Database database;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -46,13 +45,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.free.setOnClickListener(this);
-        binding.paid.setOnClickListener(this);
         binding.question.setOnClickListener(this);
         binding.time.setOnClickListener(this);
         binding.date.setOnClickListener(this);
+        binding.bookingmode.setOnClickListener(this);
+        binding.heading.setOnClickListener(this);
         sharedPreferences = getSharedPreferences("MODERN_ASTROLOGY", MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        phone = sharedPreferences.getString("PHONE", null);
         database = new Database(this);
         try{
             connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -60,14 +60,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(networkInfo == null)
             {
                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this)
-                        .setMessage("Date Connection Required")
+                        .setMessage("Data Connection Required")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 System.exit(0);
                             }
                         })
-                        .setCancelable(false);
+                        .setCancelable(true);
                 builder.create().show();
             }
         }
@@ -80,20 +80,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
-                    case R.id.message:
-                    {
-                        Intent intent = new Intent(MainActivity.this, Prediction.class);
-                        startActivity(intent);
-                        break;
-                    }
                     case R.id.signout:
                     {
                         Toast.makeText(MainActivity.this, "Signed Out", Toast.LENGTH_SHORT).show();
                         editor.remove("PHONE");
+                        editor.remove("NAME");
                         editor.apply();
                         Intent intent = new Intent(MainActivity.this, Login.class);
                         startActivity(intent);
                         break;
+                    }
+                    case R.id.contact:
+                    {
+                        Intent intent = new Intent(MainActivity.this, Contact.class);
+                        startActivity(intent);
                     }
                 }
                 return true;
@@ -105,13 +105,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         binding.bottomNavigationView.setSelectedItemId(R.id.home);
-        Intent intent;
-        boolean waitPage = sharedPreferences.getBoolean("WAIT", false);
-        if(waitPage)
-        {
-            intent = new Intent(MainActivity.this, Wait.class);
-            startActivity(intent);
-        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        binding.name.setText(sharedPreferences.getString("NAME", null));
     }
 
     @Override
@@ -120,66 +119,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.question:
             {
-                question();
+                appoinmetnt();
                 break;
             }
             case R.id.date:
             {
-                date();
+                Runnable run = new Runnable() {
+                    @Override
+                    public void run() {
+                        date();
+                    }
+                };
+                runOnUiThread(run);
                 break;
             }
             case R.id.time:
             {
-                time();
+                Runnable run = new Runnable() {
+                    @Override
+                    public void run() {
+                        time();
+                    }
+                };
+                runOnUiThread(run);
                 break;
             }
-            case R.id.free:
+            case R.id.bookingmode:
             {
-                name = binding.name.getText().toString();
-                date = binding.date.getText().toString();
-                time = binding.time.getText().toString();
-                b_place = binding.place.getText().toString();
-                c_place = binding.presentplace.getText().toString();
-                request = "Free";
-//                uid = user.getUid();
-                phone = sharedPreferences.getString("PHONE", null);
-                if(!(name.isEmpty() && date.isEmpty() && time.isEmpty() && b_place.isEmpty() && c_place.isEmpty() && request.isEmpty() && phone.isEmpty()))
-                {
-                    try{
-                        database.write(name, date, time, b_place, c_place, question, request, phone);
-                        editor.putBoolean("WAIT", true);
-                        Intent intent = new Intent(MainActivity.this, Wait.class);
-                        startActivity(intent);
-                    }
-                    catch(Exception e)
-                    {
-                        Toast.makeText(MainActivity.this, "Error in Database", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                bookingMode();
                 break;
             }
-            case R.id.paid:
+            case R.id.heading:
             {
-                if(!(name.isEmpty() && date.isEmpty() && time.isEmpty() && b_place.isEmpty() && c_place.isEmpty() && request.isEmpty() && phone.isEmpty())) {
-                    try {
-                        database.write(name, date, time, b_place, c_place, question, request, phone);
-                        editor.putBoolean("WAIT", true);
-                        Intent intent = new Intent(MainActivity.this, Wait.class);
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        Toast.makeText(MainActivity.this, "Error in Database", Toast.LENGTH_SHORT).show();
-                    }
+                try{
+                    Intent intent = new Intent(MainActivity.this, Channel.class);
+                    startActivity(intent);
                 }
-                name = binding.name.getText().toString();
-                date = binding.date.getText().toString();
-                time = binding.time.getText().toString();
-                b_place = binding.place.getText().toString();
-                c_place = binding.presentplace.getText().toString();
-                request = "Paid";
-//                uid = user.getUid();
-                phone = sharedPreferences.getString("PHONE", null);
-                pay();
-                break;
+                catch(Exception e)
+                {}
             }
         }
         editor.commit();
@@ -230,20 +207,106 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     void pay()
     {
-        Uri uri = Uri.parse("upi://pay").buildUpon()
-                .appendQueryParameter("pa", "")
-                .appendQueryParameter("pn", "")
-                .appendQueryParameter("tn", "Modern Astrology - Paid Preddiction Request")
-                .appendQueryParameter("am", "")
-                .appendQueryParameter("cu", "INR")
-                .build();
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(uri);
-        Intent chooser = Intent.createChooser(intent, "Select a Payment Method");
-        if(chooser.resolveActivity(getPackageManager()) != null)
-            startActivityForResult(chooser, 1);
-        else
-            Toast.makeText(MainActivity.this, R.string.noapp, Toast.LENGTH_SHORT).show();
+        name = binding.name.getText().toString();
+        date = binding.date.getText().toString();
+        time = binding.time.getText().toString();
+        b_place = binding.place.getText().toString();
+        c_place = binding.presentplace.getText().toString();
+        try{
+            database.write(name, date, time, b_place, c_place, phone, booking, appointment);
+            Intent intent = new Intent(MainActivity.this, Contact.class);
+            startActivity(intent);
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(MainActivity.this, "Error in Database", Toast.LENGTH_SHORT).show();
+        }
+//        Uri uri = Uri.parse("upi://pay").buildUpon()
+//                .appendQueryParameter("pa", "whitelightofuniverse-1@okicici")
+//                .appendQueryParameter("pn", "Modern Astrology")
+//				.appendQueryParameter("mc", "")
+//                .appendQueryParameter("tn", "Modern Astrology Booking")
+//                .appendQueryParameter("am", "1")
+//                .appendQueryParameter("cu", "INR")
+//                .build();
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setData(uri);
+//        Intent chooser = Intent.createChooser(intent, "Select a Payment Method");
+//        if(chooser.resolveActivity(getPackageManager()) != null)
+//            startActivityForResult(chooser, 1);
+//        else
+//            Toast.makeText(MainActivity.this, R.string.noapp, Toast.LENGTH_SHORT).show();
+    }
+
+    void appTime()
+    {
+        MaterialTimePicker.Builder timeBuilder = new MaterialTimePicker.Builder();
+        timeBuilder.setTitleText("Select Appointment Time");
+        timeBuilder.setTimeFormat(TimeFormat.CLOCK_12H);
+        MaterialTimePicker materialTimePicker = timeBuilder.build();
+        materialTimePicker.show(getSupportFragmentManager(), "MATERIAL_TIME_PICKER");
+        materialTimePicker.addOnPositiveButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String time = materialTimePicker.getHour()+":"+materialTimePicker.getMinute();
+                apptime = materialTimePicker.getHour()+":"+materialTimePicker.getMinute();
+                appointment = appointment+" at "+apptime;
+                alert();
+            }
+        });
+    }
+
+    void bookingMode()
+    {
+        View view = getLayoutInflater().inflate(R.layout.booking, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select your preffered prediction mode")
+                .setView(view)
+                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MaterialRadioButton onPhone = view.findViewById(R.id.overthephone);
+                        MaterialRadioButton inChamber = view.findViewById(R.id.inchamber);
+                        if(onPhone.isChecked())
+                            booking = "Over The Phone";
+                        else if(inChamber.isChecked())
+                            booking = "In Chamber";
+                        pay();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        builder.show();
+    }
+
+    void alert()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Important")
+                .setMessage("The Astrologer will contact you to confirm your booking!")
+                .setPositiveButton("Accept", null);
+        builder.create().show();
+    }
+
+    void appoinmetnt()
+    {
+        Calendar calendar = Calendar.getInstance();
+        CalendarConstraints.Builder calendarconstraintsbuilder = new CalendarConstraints.Builder();
+        calendar.add(Calendar.DATE, 10);
+        long date = calendar.getTimeInMillis();
+        calendarconstraintsbuilder.setValidator(DateValidatorPointForward.from(date));
+        MaterialDatePicker.Builder dateBuilder = MaterialDatePicker.Builder.datePicker();
+        dateBuilder.setTitleText("Select Appointment Date");
+        dateBuilder.setCalendarConstraints(calendarconstraintsbuilder.build());
+        MaterialDatePicker materialDatePicker = dateBuilder.build();
+        materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                appointment = materialDatePicker.getHeaderText();
+                appTime();
+            }
+        });
     }
 
     @Override
@@ -253,16 +316,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             if(data!=null)
                 Toast.makeText(MainActivity.this, R.string.success, Toast.LENGTH_SHORT).show();
+            name = binding.name.getText().toString();
+            date = binding.date.getText().toString();
+            time = binding.time.getText().toString();
+            b_place = binding.place.getText().toString();
+            c_place = binding.presentplace.getText().toString();
             try{
-                database.write(name, date, time, b_place, c_place, question, request, phone);
-                editor.putBoolean("WAIT", true);
-                Intent intent = new Intent(MainActivity.this, Wait.class);
-                startActivity(intent);
+                database.write(name, date, time, b_place, c_place, phone, booking, appointment);
             }
             catch(Exception e)
             {
                 Toast.makeText(MainActivity.this, "Error in Database", Toast.LENGTH_SHORT).show();
             }
         }
+        else
+            Toast.makeText(MainActivity.this, "Payment Failed", Toast.LENGTH_LONG).show();
     }
 }

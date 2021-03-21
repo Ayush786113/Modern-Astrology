@@ -8,11 +8,24 @@
     tools:context=".MainActivity"
     tools:visibility="visible">
 
-        <LinearLayout
-            android:id="@+id/linearname"
+        <TextView
+            android:id="@+id/heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/heading"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/amber"
+            android:fontFamily="monospace"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"/>
+
+        <LinearLayout
+            android:id="@+id/linearname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/heading"
             android:orientation="horizontal"
             android:padding="10dp">
 
@@ -35,7 +48,7 @@
 
         <LinearLayout
             android:id="@+id/lineardate"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@id/linearname"
@@ -59,7 +72,7 @@
 
         <LinearLayout
             android:id="@+id/lineartime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@id/lineardate"
@@ -82,7 +95,7 @@
 
         <LinearLayout
             android:id="@+id/linearplace"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@id/lineartime"
@@ -105,7 +118,7 @@
 
         <LinearLayout
             android:id="@+id/linearcplace"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@id/linearplace"
@@ -128,34 +141,19 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/question"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/question"
-            android:layout_above="@id/prediction"
-            android:layout_marginBottom="25dp"
-            android:padding="10dp" />
+            android:text="Select appointment date and time"
+            android:layout_above="@id/bookingmode"
+            android:layout_marginBottom="25dp"/>
 
-        <LinearLayout
-            android:id="@+id/prediction"
-            android:layout_width="wrap_content"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bookingmode"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:text="@string/predictionmode"
             android:layout_above="@id/bottomNavigationView"
-            android:padding="10dp">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/free"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/free" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/paid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/paid"
-                    android:layout_marginStart="10dp"/>
-        </LinearLayout>
+            android:layout_marginBottom="15dp"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

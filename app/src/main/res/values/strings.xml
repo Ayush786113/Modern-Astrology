@@ -14,7 +14,8 @@
     <string name="home">Home</string>
     <string name="prediction">Prediction</string>
     <string name="send">Send</string>
-    <string name="otp">Verify OTP</string>
+    <string name="appointmentdate">Select Your Appointment</string>
+    <string name="nameHint">Enter your Name</string>
     <string name="phoneHint">Enter Your Phone Number</string>
     <string name="otpHint">Enter OTP</string>
     <string name="success">Success</string>
@@ -24,4 +25,5 @@
     <string name="signout">Sign Out</string>
     <string name="noapp">No Payment App Found</string>
     <string name="noprediction">No Prediction Yet</string>
+    <string name="predictionmode">Select your preffered prediction mode</string>
 </resources>

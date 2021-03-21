@@ -26,9 +26,19 @@
         android:id="@+id/circleImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/astrologer_logo_foreground"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"/>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/nameHint"
+        android:inputType="textPersonName"
+        android:layout_gravity="center"
+        android:layout_marginTop="50sp"/>
 
     <EditText
         android:id="@+id/phone"
@@ -48,5 +58,20 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developed By"
+        android:layout_gravity="center_horizontal"
+        android:textSize="10sp"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Ayush Ghosal \n 8420860181"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 
 </LinearLayout>

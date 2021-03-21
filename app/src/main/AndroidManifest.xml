@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ModernAstrology">
-        <activity android:name=".Wait"></activity>
-        <activity android:name=".Prediction" />
+        <activity android:name=".Contact"></activity>
+        <activity android:name=".Channel" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Login">
             <intent-filter>

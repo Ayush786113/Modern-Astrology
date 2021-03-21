@@ -7,9 +7,19 @@ public class User {
     private String name;
     private String date;
     private String time;
+    private String booking;
+    private String appointment;
 
     public String getPrediction() {
         return prediction;
+    }
+
+    public String getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(String appointment) {
+        this.appointment = appointment;
     }
 
     private String prediction;
@@ -31,6 +41,14 @@ public class User {
     public void setUserinfo(FirebaseUser userinfo) {
         this.userinfo = userinfo;
         setUid(userinfo.getUid());
+    }
+
+    public String getBooking() {
+        return booking;
+    }
+
+    public void setBooking(String booking) {
+        this.booking = booking;
     }
 
     public String getName() {
